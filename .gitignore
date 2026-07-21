@@ -1,0 +1,17 @@
+.DS_Store
+.idea/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Generated metadata, checkpoints, models, predictions, and evaluation output.
+/artifacts/
+checkpoint-*/
+*.safetensors
+pytorch_model.bin
+
+# Keep the official data as a separate checkout.
+/sharedtask-data/
+/2.0/
