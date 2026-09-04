@@ -11,6 +11,12 @@ class EncodedChunk:
     labels: list[int] | None = None
 
 
+@dataclass(frozen=True)
+class ChunkMetadata:
+    example_index: int
+    word_ids: tuple[int | None, ...]
+
+
 class TokenClassificationDataset:
     def __init__(
         self,
@@ -20,9 +26,13 @@ class TokenClassificationDataset:
         max_length: int,
         stride: int,
         label_all_tokens: bool = False,
+        track_metadata: bool = False,
+        track_languages: bool = False,
     ) -> None:
         self.chunks: list[dict[str, list[int]]] = []
-        for example in examples:
+        self.chunk_metadata: list[ChunkMetadata] = []
+        self.chunk_languages: list[str] = []
+        for example_index, example in enumerate(examples):
             encoded = tokenizer(
                 example.words,
                 is_split_into_words=True,
@@ -57,6 +67,15 @@ class TokenClassificationDataset:
                         "labels": aligned_labels,
                     }
                 )
+                if track_metadata:
+                    self.chunk_metadata.append(
+                        ChunkMetadata(
+                            example_index=example_index,
+                            word_ids=tuple(word_ids),
+                        )
+                    )
+                if track_languages:
+                    self.chunk_languages.append(example.language)
 
     def __len__(self) -> int:
         return len(self.chunks)

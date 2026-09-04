@@ -1,0 +1,59 @@
+{
+  "base_dir": "..",
+  "model_order": [
+    "XLM-R",
+    "mDeBERTa-v3",
+    "mBERT"
+  ],
+  "qualitative_run": {
+    "model": "XLM-R",
+    "seed": 13
+  },
+  "runs": [
+    {
+      "model": "XLM-R",
+      "seed": 13,
+      "experiment_dir": "artifacts/experiments/e2-sqrt-sampling-seed13"
+    },
+    {
+      "model": "XLM-R",
+      "seed": 42,
+      "experiment_dir": "artifacts/experiments/tune-xlmr-a0p5-lr2em5-ep3-seed42"
+    },
+    {
+      "model": "XLM-R",
+      "seed": 2026,
+      "experiment_dir": "artifacts/experiments/tune-xlmr-a0p5-lr2em5-ep3-seed2026"
+    },
+    {
+      "model": "mDeBERTa-v3",
+      "seed": 13,
+      "experiment_dir": "artifacts/experiments/tune-mdeberta-v3-base-fp32-sa0p25-cwa0p0-clip0p75to2p5-lr2em5-ep3-seed13"
+    },
+    {
+      "model": "mDeBERTa-v3",
+      "seed": 42,
+      "experiment_dir": "artifacts/experiments/tune-mdeberta-v3-base-fp32-sa0p25-cwa0p0-clip0p75to2p5-lr2em5-ep3-seed42"
+    },
+    {
+      "model": "mDeBERTa-v3",
+      "seed": 2026,
+      "experiment_dir": "artifacts/experiments/tune-mdeberta-v3-base-fp32-sa0p25-cwa0p0-clip0p75to2p5-lr2em5-ep3-seed2026"
+    },
+    {
+      "model": "mBERT",
+      "seed": 13,
+      "experiment_dir": "artifacts/experiments/tune-mbert-base-cased-fp32-sa0p25-cwa0p0-clip0p75to2p5-lr2em5-ep3-seed13"
+    },
+    {
+      "model": "mBERT",
+      "seed": 42,
+      "experiment_dir": "artifacts/experiments/tune-mbert-base-cased-fp32-sa0p25-cwa0p0-clip0p75to2p5-lr2em5-ep3-seed42"
+    },
+    {
+      "model": "mBERT",
+      "seed": 2026,
+      "experiment_dir": "artifacts/experiments/tune-mbert-base-cased-fp32-sa0p25-cwa0p0-clip0p75to2p5-lr2em5-ep3-seed2026"
+    }
+  ]
+}

@@ -62,6 +62,8 @@ class CuptSentence:
         for token in copied.tokens:
             if token.is_syntactic_token:
                 token.mwe = next(pred_iter)
+            else:
+                token.mwe = "*"
         return copied
 
     def serialize(self) -> str:

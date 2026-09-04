@@ -1,0 +1,26 @@
+{
+  "base_dir": "..",
+  "submission_id": 884918,
+  "model_name": "XLM-R-base-a0.5-lr2e-5-seed13",
+  "dev_model": "XLM-R",
+  "dev_seed": 13,
+  "scoring_dir": "artifacts/benchmark/codabench-884918",
+  "dev_language_csv": "artifacts/analysis/final-models/per_language_seed.csv",
+  "dev_breakdown_csv": "artifacts/analysis/final-models/error_breakdown_seed.csv",
+  "leaderboard_snapshot": {
+    "captured_at": "2026-08-10T23:04:00+01:00",
+    "leaderboard_entries": 18,
+    "mwe_f1_rank": 2,
+    "token_f1_rank": 1,
+    "leader": {
+      "participant": "gokcea23",
+      "model_name": "yirmi",
+      "mwe_precision": 0.6560,
+      "mwe_recall": 0.5910,
+      "mwe_f1": 0.6218,
+      "token_precision": 0.7179,
+      "token_recall": 0.6095,
+      "token_f1": 0.6593
+    }
+  }
+}

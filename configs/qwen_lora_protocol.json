@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "status": "confirmation_seeds_complete",
+  "base_model": "Qwen/Qwen3.5-4B",
+  "base_model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "objective": "completion-only causal language modelling of token-index MWE JSON",
+  "shared_controls": {
+    "epochs": 1,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 16,
+    "max_length": 640,
+    "lora_dropout": 0.05,
+    "device_dtype": "MPS bfloat16",
+    "decoding": "zero-shot non-thinking greedy",
+    "max_new_tokens": 96
+  },
+  "screening": {
+    "max_train_sentences_per_language": 100,
+    "resolved_selected_examples": 1590,
+    "resolved_encoded_examples": 1572,
+    "overlength_examples_excluded": 18,
+    "training_seed": 13,
+    "selection_metric": "official exact MWE macro-F1",
+    "selection_sample": {
+      "split": "dev",
+      "seed": 42,
+      "sample_purpose": "qwen-train-calibration-v1-frozen-dev",
+      "positive_per_language": 4,
+      "negative_per_language": 4,
+      "languages": 16,
+      "sentences": 128
+    },
+    "candidates": [
+      {
+        "id": "L0",
+        "learning_rate": 0.0002,
+        "language_sampling_alpha": 0.5,
+        "lora_rank": 16,
+        "lora_alpha": 32
+      },
+      {
+        "id": "L1",
+        "learning_rate": 0.0001,
+        "language_sampling_alpha": 0.5,
+        "lora_rank": 16,
+        "lora_alpha": 32
+      },
+      {
+        "id": "L2",
+        "learning_rate": 0.0002,
+        "language_sampling_alpha": 0.5,
+        "lora_rank": 8,
+        "lora_alpha": 16
+      },
+      {
+        "id": "L3",
+        "learning_rate": 0.0002,
+        "language_sampling_alpha": 0.25,
+        "lora_rank": 16,
+        "lora_alpha": 32
+      }
+    ]
+  },
+  "screening_outcome": {
+    "sample_manifest_sha256": "3480456b4d4dd7fff37fe309b1f5bd90e548dc71d1324cdb1894d7b5d7148f24",
+    "all_candidate_sample_manifests_identical": true,
+    "all_candidate_outputs_strictly_parsed": true,
+    "results": [
+      {
+        "id": "L0",
+        "mwe_precision": 0.2725,
+        "mwe_recall": 0.1879,
+        "mwe_f1": 0.2224,
+        "token_f1": 0.3694,
+        "train_loss": 0.2856378940620808,
+        "trainable_parameters": 32464896
+      },
+      {
+        "id": "L1",
+        "mwe_precision": 0.2115,
+        "mwe_recall": 0.1577,
+        "mwe_f1": 0.1807,
+        "token_f1": 0.3178,
+        "train_loss": 0.29660703678323763,
+        "trainable_parameters": 32464896
+      },
+      {
+        "id": "L2",
+        "mwe_precision": 0.2801,
+        "mwe_recall": 0.1917,
+        "mwe_f1": 0.2276,
+        "token_f1": 0.3362,
+        "train_loss": 0.2992817849823923,
+        "trainable_parameters": 16232448
+      },
+      {
+        "id": "L3",
+        "mwe_precision": 0.2557,
+        "mwe_recall": 0.1795,
+        "mwe_f1": 0.2109,
+        "token_f1": 0.3325,
+        "train_loss": 0.2837853804983274,
+        "trainable_parameters": 32464896
+      }
+    ],
+    "selected_candidate": "L2",
+    "selection_rule_applied": "highest official exact MWE macro-F1 on the frozen screening subset",
+    "selection_note": "L2 leads L0 by 0.0052 absolute MWE F1; this is a configuration-selection statistic, not a final performance estimate."
+  },
+  "final_training": {
+    "max_train_sentences_per_language": 500,
+    "training_subset_seed": 13,
+    "resolved_seed13_selected_examples": 7442,
+    "resolved_seed13_encoded_examples": 7348,
+    "overlength_examples_excluded": 94,
+    "seeds": [13, 42, 2026],
+    "confirmation_seeds_completed": true,
+    "seed13_result": {
+      "status": "completed",
+      "adapter_dir": "artifacts/experiments/lora-qwen3p5-4b-n500pl-ml640-sa0p5-r8-a16-d0p05-lr2em4-ep1-seed13/adapter",
+      "global_step": 460,
+      "completed_epochs": 1.0,
+      "train_loss": 0.20969818700914797,
+      "train_runtime_seconds": 25903.8359,
+      "trainable_parameters": 16232448,
+      "total_parameters_with_adapter": 4221983744,
+      "frozen_subset_diagnostic": {
+        "sentences": 128,
+        "all_outputs_strictly_parsed": true,
+        "truncated_prompts": 0,
+        "mwe_precision": 0.6091,
+        "mwe_recall": 0.3782,
+        "mwe_f1": 0.4666,
+        "token_precision": 0.7396,
+        "token_recall": 0.4605,
+        "token_f1": 0.5676,
+        "prompted_qwen_mwe_f1_same_subset": 0.0334,
+        "xlmr_mwe_f1_same_subset": 0.7295,
+        "interpretation": "Diagnostic on the frozen balanced subset only; not the primary full-development estimate."
+      },
+      "complete_development": {
+        "sentences": 20163,
+        "mwe_precision": 0.5020,
+        "mwe_recall": 0.3794,
+        "mwe_f1": 0.4322,
+        "token_precision": 0.5990,
+        "token_recall": 0.4569,
+        "token_f1": 0.5184,
+        "strictly_parsed_outputs": 20156,
+        "error_outputs": 7,
+        "truncated_prompts": 5
+      }
+    },
+    "seed42_result": {
+      "status": "completed",
+      "adapter_dir": "artifacts/experiments/lora-qwen3p5-4b-n500pl-ml640-sa0p5-r8-a16-d0p05-lr2em4-ep1-seed42/adapter",
+      "global_step": 460,
+      "completed_epochs": 1.0,
+      "train_loss": 0.2052339802617612,
+      "train_runtime_seconds": 25800.1315,
+      "trainable_parameters": 16232448,
+      "total_parameters_with_adapter": 4221983744,
+      "frozen_subset_diagnostic": {
+        "sentences": 128,
+        "all_outputs_strictly_parsed": true,
+        "truncated_prompts": 0,
+        "mwe_precision": 0.5071,
+        "mwe_recall": 0.3796,
+        "mwe_f1": 0.4342,
+        "token_precision": 0.6355,
+        "token_recall": 0.4430,
+        "token_f1": 0.5221
+      },
+      "complete_development": {
+        "sentences": 20163,
+        "mwe_precision": 0.4858,
+        "mwe_recall": 0.3817,
+        "mwe_f1": 0.4275,
+        "token_precision": 0.5672,
+        "token_recall": 0.4436,
+        "token_f1": 0.4978,
+        "strictly_parsed_outputs": 20158,
+        "warning_outputs": 2,
+        "error_outputs": 3,
+        "truncated_prompts": 5
+      }
+    },
+    "seed2026_result": {
+      "status": "completed",
+      "adapter_dir": "artifacts/experiments/lora-qwen3p5-4b-n500pl-ml640-sa0p5-r8-a16-d0p05-lr2em4-ep1-seed2026/adapter",
+      "global_step": 460,
+      "completed_epochs": 1.0,
+      "train_loss": 0.2029132332490838,
+      "train_runtime_seconds": 26145.3138,
+      "trainable_parameters": 16232448,
+      "total_parameters_with_adapter": 4221983744,
+      "frozen_subset_diagnostic": {
+        "sentences": 128,
+        "all_outputs_strictly_parsed": true,
+        "truncated_prompts": 0,
+        "mwe_precision": 0.5078,
+        "mwe_recall": 0.3685,
+        "mwe_f1": 0.4271,
+        "token_precision": 0.5885,
+        "token_recall": 0.4049,
+        "token_f1": 0.4797
+      },
+      "complete_development": {
+        "sentences": 20163,
+        "mwe_precision": 0.4872,
+        "mwe_recall": 0.3792,
+        "mwe_f1": 0.4265,
+        "token_precision": 0.5437,
+        "token_recall": 0.4253,
+        "token_f1": 0.4773,
+        "strictly_parsed_outputs": 20157,
+        "warning_outputs": 2,
+        "error_outputs": 4,
+        "truncated_prompts": 5
+      }
+    },
+    "three_seed_summary": {
+      "source": "artifacts/analysis/qwen-lora-confirmations/summary.json",
+      "standard_deviation": "sample (n-1)",
+      "training_composition_identical": true,
+      "train_loss": {
+        "mean": 0.20594846683999765,
+        "sample_standard_deviation": 0.0034484442411632853
+      },
+      "frozen_subset_diagnostic": {
+        "mwe_precision": {"mean": 0.5413333333333333, "sample_standard_deviation": 0.05868869851456352},
+        "mwe_recall": {"mean": 0.37543333333333334, "sample_standard_deviation": 0.006045108215187987},
+        "mwe_f1": {"mean": 0.4426333333333333, "sample_standard_deviation": 0.02105714447244294},
+        "token_precision": {"mean": 0.6545333333333333, "sample_standard_deviation": 0.0773272483238175},
+        "token_recall": {"mean": 0.4361333333333333, "sample_standard_deviation": 0.02842891720297019},
+        "token_f1": {"mean": 0.5231333333333333, "sample_standard_deviation": 0.043959109787771324}
+      },
+      "complete_development": {
+        "mwe_precision": {"mean": 0.4916666666666667, "sample_standard_deviation": 0.008976264999059085},
+        "mwe_recall": {"mean": 0.3801, "sample_standard_deviation": 0.0013892443989449734},
+        "mwe_f1": {"mean": 0.4287333333333333, "sample_standard_deviation": 0.003043572462310249},
+        "token_precision": {"mean": 0.5699666666666666, "sample_standard_deviation": 0.027753618382714236},
+        "token_recall": {"mean": 0.44193333333333334, "sample_standard_deviation": 0.015865791292379108},
+        "token_f1": {"mean": 0.49783333333333335, "sample_standard_deviation": 0.020550020275740186},
+        "strictly_parsed_outputs": 60471,
+        "warning_outputs": 4,
+        "error_outputs": 14,
+        "truncated_prompts": 15
+      }
+    }
+  },
+  "confirmation_amendment": {
+    "recorded_date": "2026-08-21",
+    "recorded_before_confirmation_runs": true,
+    "training_subset_seed": 13,
+    "optimization_seeds": [42, 2026],
+    "evaluation_sample_seed": 42,
+    "rationale": "Hold the capped training composition and evaluation samples fixed so confirmation variance reflects adapter initialisation, training order, and sampler randomness rather than a different 500-sentence subset per language."
+  },
+  "primary_evaluation": {
+    "split": "complete dev",
+    "languages": 16,
+    "sentences": 20163,
+    "metric": "official exact MWE macro precision, recall and F1",
+    "blind_test_labels_used_for_selection": false
+  }
+}
